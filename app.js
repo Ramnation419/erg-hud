@@ -11,6 +11,7 @@ const ergData = {
 };
 
 let activeErgNumber = "1203";
+let enteredErgNumber = "";
 
 function focusFirst() {
   const first = document.querySelector("button");
@@ -34,10 +35,9 @@ function renderMainMenu() {
   focusFirst();
 }
 
-let enteredErgNumber = "";
-
 function renderErgLookup() {
   enteredErgNumber = "";
+
   hud.innerHTML = `
     <div class="header">ERG LOOKUP</div>
 
@@ -49,23 +49,18 @@ function renderErgLookup() {
       <button data-digit="1">1</button>
       <button data-digit="2">2</button>
       <button data-digit="3">3</button>
-
       <button data-digit="4">4</button>
       <button data-digit="5">5</button>
       <button data-digit="6">6</button>
-
       <button data-digit="7">7</button>
       <button data-digit="8">8</button>
       <button data-digit="9">9</button>
-
       <button data-action="clear">CLR</button>
       <button data-digit="0">0</button>
       <button data-action="search">GO</button>
     </div>
 
-    <button data-action="home" class="home-button">
-      HOME
-    </button>
+    <button data-action="home" class="home-button">HOME</button>
   `;
 
   focusFirst();
@@ -78,7 +73,6 @@ function renderErgResult(number) {
   if (!result) {
     hud.innerHTML = `
       <div class="header">ERG RESULT</div>
-
       <div class="result-title">NO RECORD FOUND</div>
       <div class="result-sub">UN / NA ${number}</div>
 
@@ -137,15 +131,64 @@ function renderErgDetails() {
   focusFirst();
 }
 
+function renderEmsMenu() {
+  hud.innerHTML = `
+    <div class="header">EMS</div>
+
+    <div class="menu">
+      <button data-action="adult-cpr">ADULT CPR</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO CONTENT</div>
+  `;
+
+  focusFirst();
+}
+
+function renderAdultCpr() {
+  hud.innerHTML = `
+    <div class="header">ADULT CPR</div>
+
+    <div class="result-title">CARDIAC ARREST</div>
+
+    <div class="info-block">
+      CHECK RESPONSIVENESS
+    </div>
+
+    <div class="info-block">
+      ACTIVATE EMS / GET AED
+    </div>
+
+    <div class="info-block">
+      START HIGH-QUALITY CPR
+    </div>
+
+    <div class="info-block">
+      30 : 2
+    </div>
+
+    <div class="info-block">
+      100–120 / MIN
+    </div>
+
+    <div class="menu">
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
+  `;
+
+  focusFirst();
+}
+
 document.addEventListener("click", (event) => {
   const button = event.target.closest("button");
-
   if (!button) return;
 
   const action = button.dataset.action;
   const digit = button.dataset.digit;
 
-  // Numeric keypad
   if (digit) {
     if (enteredErgNumber.length < 4) {
       enteredErgNumber += digit;
@@ -153,57 +196,58 @@ document.addEventListener("click", (event) => {
       document.querySelector("#ergNumber").textContent =
         enteredErgNumber.padEnd(4, "-");
     }
-
     return;
   }
 
-  // Main menu
   if (action === "erg") {
     renderErgLookup();
     return;
   }
 
-  // Clear ERG number
+  if (action === "ems") {
+    renderEmsMenu();
+    return;
+  }
+
+  if (action === "adult-cpr") {
+    renderAdultCpr();
+    return;
+  }
+
   if (action === "clear") {
     enteredErgNumber = "";
-
     document.querySelector("#ergNumber").textContent = "----";
     return;
   }
 
-  // Search ERG
   if (action === "search") {
     if (enteredErgNumber.length > 0) {
       renderErgResult(enteredErgNumber);
     }
-
     return;
   }
 
-  // Open details
   if (action === "details") {
     renderErgDetails();
     return;
   }
 
-  // Back to lookup
   if (action === "back-lookup") {
     renderErgLookup();
     return;
   }
 
-  // Back to result
   if (action === "back-result") {
     renderErgResult(activeErgNumber);
     return;
   }
 
-  // Main Fire Lens menu
   if (action === "home") {
     renderMainMenu();
     return;
   }
 });
+
 document.addEventListener("keydown", (event) => {
   const focusable = [
     ...document.querySelectorAll("button")
@@ -241,8 +285,9 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.key === "Enter") {
+    event.preventDefault();
+
     if (document.activeElement.tagName === "BUTTON") {
-      event.preventDefault();
       document.activeElement.click();
     }
   }
