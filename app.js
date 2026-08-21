@@ -10,268 +10,186 @@ const ergData = {
   }
 };
 
-let currentScreen = "main";
-let selectedIndex = 0;
-let activeErgNumber = null;
+let activeErgNumber = "1203";
+
+function focusFirst() {
+  const first = document.querySelector("button, input");
+  if (first) first.focus();
+}
 
 function renderMainMenu() {
-  currentScreen = "main";
-  selectedIndex = 0;
-
   hud.innerHTML = `
     <div class="header">FIRE LENS</div>
 
     <div class="menu">
-      <button class="menu-item selected">ERG</button>
-      <button class="menu-item">EMS</button>
-      <button class="menu-item">EQUIPMENT</button>
-      <button class="menu-item">PREPLANS</button>
+      <button data-action="erg">ERG</button>
+      <button data-action="ems">EMS</button>
+      <button data-action="equipment">EQUIPMENT</button>
+      <button data-action="preplans">PREPLANS</button>
     </div>
 
-    <div class="footer">Select with band</div>
+    <div class="footer">FIRE / EMS INFORMATION</div>
   `;
+
+  focusFirst();
 }
 
 function renderErgLookup() {
-  currentScreen = "ergLookup";
-  selectedIndex = 0;
-
   hud.innerHTML = `
     <div class="header">ERG LOOKUP</div>
 
-    <div style="font-size:22px; margin-bottom:18px;">
-      UN / NA NUMBER
-    </div>
+    <label for="ergInput">UN / NA NUMBER</label>
 
     <input
       id="ergInput"
       type="text"
-      value="${activeErgNumber || "1203"}"
-      maxlength="4"
       inputmode="numeric"
-      style="
-        font-size:44px;
-        width:100%;
-        padding:18px;
-        background:#111;
-        color:white;
-        border:2px solid white;
-        border-radius:12px;
-        margin-bottom:22px;
-      "
+      maxlength="4"
+      value="${activeErgNumber}"
     />
 
     <div class="menu">
-      <button class="menu-item selected">SEARCH</button>
-      <button class="menu-item">HOME</button>
+      <button data-action="search">SEARCH</button>
+      <button data-action="home">HOME</button>
     </div>
-
-    <div class="footer">FIRE LENS</div>
   `;
 
-  document.querySelector("#ergInput").focus();
+  focusFirst();
 }
 
 function renderErgResult(number) {
   activeErgNumber = number;
-  currentScreen = "ergResult";
-  selectedIndex = 0;
-
   const result = ergData[number];
 
   if (!result) {
     hud.innerHTML = `
       <div class="header">ERG RESULT</div>
 
-      <div style="font-size:34px; font-weight:bold; margin-top:30px;">
-        NO RECORD FOUND
-      </div>
+      <div class="result-title">NO RECORD FOUND</div>
+      <div class="result-sub">UN / NA ${number}</div>
 
-      <div style="font-size:24px; margin-top:20px;">
-        UN / NA ${number}
+      <div class="menu">
+        <button data-action="back-lookup">BACK</button>
+        <button data-action="home">HOME</button>
       </div>
-
-      <div class="menu" style="margin-top:50px;">
-        <button class="menu-item selected">BACK</button>
-        <button class="menu-item">HOME</button>
-      </div>
-
-      <div class="footer">FIRE LENS</div>
     `;
 
+    focusFirst();
     return;
   }
 
   hud.innerHTML = `
     <div class="header">ERG RESULT</div>
 
-    <div style="font-size:44px; font-weight:bold;">
-      ${result.name}
-    </div>
+    <div class="result-title">${result.name}</div>
+    <div class="result-sub">UN ${number}</div>
+    <div class="result-sub">GUIDE ${result.guide}</div>
+    <div class="hazard">${result.hazard}</div>
 
-    <div style="font-size:28px; margin-top:12px;">
-      UN ${number}
+    <div class="menu">
+      <button data-action="details">DETAILS</button>
+      <button data-action="back-lookup">BACK</button>
+      <button data-action="home">HOME</button>
     </div>
-
-    <div style="font-size:28px; margin-top:12px;">
-      GUIDE ${result.guide}
-    </div>
-
-    <div style="font-size:24px; margin-top:24px;">
-      ${result.hazard}
-    </div>
-
-    <div class="menu" style="margin-top:28px;">
-      <button class="menu-item selected">DETAILS</button>
-      <button class="menu-item">BACK</button>
-      <button class="menu-item">HOME</button>
-    </div>
-
-    <div class="footer">FIRE LENS</div>
   `;
+
+  focusFirst();
 }
 
 function renderErgDetails() {
   const result = ergData[activeErgNumber];
 
-  if (!result) {
-    renderErgLookup();
-    return;
-  }
-
-  currentScreen = "ergDetails";
-  selectedIndex = 0;
-
   hud.innerHTML = `
     <div class="header">GUIDE ${result.guide}</div>
 
-    <div style="font-size:30px; font-weight:bold;">
-      ${result.name}
-    </div>
+    <div class="result-title">${result.name}</div>
 
-    <div style="font-size:21px; margin-top:24px;">
+    <div class="info-block">
       <strong>ISOLATION</strong><br>
       ${result.isolation}
     </div>
 
-    <div style="font-size:21px; margin-top:22px;">
+    <div class="info-block">
       <strong>RESPONSE</strong><br>
       ${result.response}
     </div>
 
-    <div class="menu" style="margin-top:28px;">
-      <button class="menu-item selected">BACK</button>
-      <button class="menu-item">HOME</button>
+    <div class="menu">
+      <button data-action="back-result">BACK</button>
+      <button data-action="home">HOME</button>
     </div>
-
-    <div class="footer">FIRE LENS</div>
   `;
+
+  focusFirst();
 }
 
-function updateSelection() {
-  const items = document.querySelectorAll(".menu-item");
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button) return;
 
-  items.forEach((item, index) => {
-    item.classList.toggle("selected", index === selectedIndex);
-  });
-}
+  const action = button.dataset.action;
 
-function moveSelection(direction) {
-  const items = document.querySelectorAll(".menu-item");
-
-  if (!items.length) return;
-
-  selectedIndex =
-    (selectedIndex + direction + items.length) % items.length;
-
-  updateSelection();
-}
-
-function activateSelection() {
-  const items = document.querySelectorAll(".menu-item");
-
-  if (!items.length) return;
-
-  const selected = items[selectedIndex].textContent.trim();
-
-  if (currentScreen === "main") {
-    if (selected === "ERG") renderErgLookup();
-    return;
+  if (action === "erg") {
+    renderErgLookup();
   }
 
-  if (currentScreen === "ergLookup") {
-    if (selected === "SEARCH") {
-      const number = document
-        .querySelector("#ergInput")
-        .value
-        .trim();
-
-      renderErgResult(number);
-    }
-
-    if (selected === "HOME") {
-      renderMainMenu();
-    }
-
-    return;
+  if (action === "search") {
+    const input = document.querySelector("#ergInput");
+    renderErgResult(input.value.trim());
   }
 
-  if (currentScreen === "ergResult") {
-    if (selected === "DETAILS") {
-      renderErgDetails();
-    }
-
-    if (selected === "BACK") {
-      renderErgLookup();
-    }
-
-    if (selected === "HOME") {
-      renderMainMenu();
-    }
-
-    return;
+  if (action === "details") {
+    renderErgDetails();
   }
 
-  if (currentScreen === "ergDetails") {
-    if (selected === "BACK") {
-      renderErgResult(activeErgNumber);
-    }
-
-    if (selected === "HOME") {
-      renderMainMenu();
-    }
+  if (action === "back-lookup") {
+    renderErgLookup();
   }
-}
+
+  if (action === "back-result") {
+    renderErgResult(activeErgNumber);
+  }
+
+  if (action === "home") {
+    renderMainMenu();
+  }
+});
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowDown") {
+  const focusable = [
+    ...document.querySelectorAll("button, input")
+  ];
+
+  if (!focusable.length) return;
+
+  const currentIndex = focusable.indexOf(document.activeElement);
+
+  if (event.key === "ArrowDown" || event.key === "ArrowRight") {
     event.preventDefault();
-    moveSelection(1);
+
+    const next =
+      currentIndex < 0
+        ? 0
+        : (currentIndex + 1) % focusable.length;
+
+    focusable[next].focus();
   }
 
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
     event.preventDefault();
-    moveSelection(-1);
+
+    const previous =
+      currentIndex <= 0
+        ? focusable.length - 1
+        : currentIndex - 1;
+
+    focusable[previous].focus();
   }
 
   if (event.key === "Enter") {
-    event.preventDefault();
-    activateSelection();
-  }
-
-  if (event.key === "Escape") {
-    event.preventDefault();
-
-    if (currentScreen === "ergLookup") {
-      renderMainMenu();
-    }
-
-    else if (currentScreen === "ergResult") {
-      renderErgLookup();
-    }
-
-    else if (currentScreen === "ergDetails") {
-      renderErgResult(activeErgNumber);
+    if (document.activeElement.tagName === "BUTTON") {
+      event.preventDefault();
+      document.activeElement.click();
     }
   }
 });
