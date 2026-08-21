@@ -205,32 +205,113 @@ document.addEventListener("click", (event) => {
   }
 });
 document.addEventListener("keydown", (event) => {
- const focusable = [
-  ...document.querySelectorAll("button")
-];
+  const focusable = [
+    ...document.querySelectorAll("button")
+  ];
 
   if (!focusable.length) return;
 
   const currentIndex = focusable.indexOf(document.activeElement);
 
-  if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+  if (currentIndex < 0) {
+    focusable[0].focus();
+    return;
+  }
+
+  // ERG keypad uses a 3-column grid
+  const keypadButtons = [
+    ...document.querySelectorAll(".keypad button")
+  ];
+
+  const keypadIndex =
+    keypadButtons.indexOf(document.activeElement);
+
+  if (keypadIndex >= 0) {
+    const columns = 3;
+
+    let nextIndex = keypadIndex;
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+
+      if ((keypadIndex + 1) % columns !== 0) {
+        nextIndex = keypadIndex + 1;
+      }
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+
+      if (keypadIndex % columns !== 0) {
+        nextIndex = keypadIndex - 1;
+      }
+    }
+
+  if (event.key === "ArrowDown") {
+  event.preventDefault();
+
+  if (keypadIndex + columns < keypadButtons.length) {
+    nextIndex = keypadIndex + columns;
+    keypadButtons[nextIndex].focus();
+    return;
+  }
+
+  const homeButton = document.querySelector(".home-button");
+
+  if (homeButton) {
+    homeButton.focus();
+    return;
+  }
+}
+
+if (event.key === "ArrowUp") {
+  event.preventDefault();
+
+  if (keypadIndex - columns >= 0) {
+    nextIndex = keypadIndex - columns;
+    keypadButtons[nextIndex].focus();
+    return;
+  }
+}
+
+keypadButtons[nextIndex].focus();
+return;
+}
+if (
+  document.activeElement.classList.contains("home-button") &&
+  event.key === "ArrowUp"
+) {
+  event.preventDefault();
+
+  const keypadButtons = [
+    ...document.querySelectorAll(".keypad button")
+  ];
+
+  keypadButtons[keypadButtons.length - 2].focus();
+  return;
+}
+  // Normal menus stay linear
+  if (
+    event.key === "ArrowDown" ||
+    event.key === "ArrowRight"
+  ) {
     event.preventDefault();
 
     const next =
-      currentIndex < 0
-        ? 0
-        : (currentIndex + 1) % focusable.length;
+      (currentIndex + 1) % focusable.length;
 
     focusable[next].focus();
   }
 
-  if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+  if (
+    event.key === "ArrowUp" ||
+    event.key === "ArrowLeft"
+  ) {
     event.preventDefault();
 
     const previous =
-      currentIndex <= 0
-        ? focusable.length - 1
-        : currentIndex - 1;
+      (currentIndex - 1 + focusable.length) %
+      focusable.length;
 
     focusable[previous].focus();
   }
