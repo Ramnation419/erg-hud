@@ -122,3 +122,28 @@ input:focus {
   font-size: 14px;
   opacity: 0.65;
 }
+.erg-number {
+  font-size: 52px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 10px;
+  margin-bottom: 20px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.keypad button {
+  min-height: 68px;
+  text-align: center;
+  font-size: 26px;
+}
+
+.home-button {
+  margin-top: 14px;
+  min-height: 58px;
+  text-align: center;
+}

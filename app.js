@@ -13,7 +13,7 @@ const ergData = {
 let activeErgNumber = "1203";
 
 function focusFirst() {
-  const first = document.querySelector("button, input");
+  const first = document.querySelector("button");
   if (first) first.focus();
 }
 
@@ -34,24 +34,38 @@ function renderMainMenu() {
   focusFirst();
 }
 
+let enteredErgNumber = "";
+
 function renderErgLookup() {
+  enteredErgNumber = "";
   hud.innerHTML = `
     <div class="header">ERG LOOKUP</div>
 
-    <label for="ergInput">UN / NA NUMBER</label>
-
-    <input
-      id="ergInput"
-      type="text"
-      inputmode="numeric"
-      maxlength="4"
-      value="${activeErgNumber}"
-    />
-
-    <div class="menu">
-      <button data-action="search">SEARCH</button>
-      <button data-action="home">HOME</button>
+    <div class="erg-number" id="ergNumber">
+      ----
     </div>
+
+    <div class="keypad">
+      <button data-digit="1">1</button>
+      <button data-digit="2">2</button>
+      <button data-digit="3">3</button>
+
+      <button data-digit="4">4</button>
+      <button data-digit="5">5</button>
+      <button data-digit="6">6</button>
+
+      <button data-digit="7">7</button>
+      <button data-digit="8">8</button>
+      <button data-digit="9">9</button>
+
+      <button data-action="clear">CLR</button>
+      <button data-digit="0">0</button>
+      <button data-action="search">GO</button>
+    </div>
+
+    <button data-action="home" class="home-button">
+      HOME
+    </button>
   `;
 
   focusFirst();
@@ -125,40 +139,75 @@ function renderErgDetails() {
 
 document.addEventListener("click", (event) => {
   const button = event.target.closest("button");
+
   if (!button) return;
 
   const action = button.dataset.action;
+  const digit = button.dataset.digit;
 
+  // Numeric keypad
+  if (digit) {
+    if (enteredErgNumber.length < 4) {
+      enteredErgNumber += digit;
+
+      document.querySelector("#ergNumber").textContent =
+        enteredErgNumber.padEnd(4, "-");
+    }
+
+    return;
+  }
+
+  // Main menu
   if (action === "erg") {
     renderErgLookup();
+    return;
   }
 
+  // Clear ERG number
+  if (action === "clear") {
+    enteredErgNumber = "";
+
+    document.querySelector("#ergNumber").textContent = "----";
+    return;
+  }
+
+  // Search ERG
   if (action === "search") {
-    const input = document.querySelector("#ergInput");
-    renderErgResult(input.value.trim());
+    if (enteredErgNumber.length > 0) {
+      renderErgResult(enteredErgNumber);
+    }
+
+    return;
   }
 
+  // Open details
   if (action === "details") {
     renderErgDetails();
+    return;
   }
 
+  // Back to lookup
   if (action === "back-lookup") {
     renderErgLookup();
+    return;
   }
 
+  // Back to result
   if (action === "back-result") {
     renderErgResult(activeErgNumber);
+    return;
   }
 
+  // Main Fire Lens menu
   if (action === "home") {
     renderMainMenu();
+    return;
   }
 });
-
 document.addEventListener("keydown", (event) => {
-  const focusable = [
-    ...document.querySelectorAll("button, input")
-  ];
+ const focusable = [
+  ...document.querySelectorAll("button")
+];
 
   if (!focusable.length) return;
 
