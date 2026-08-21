@@ -211,31 +211,109 @@ document.addEventListener("keydown", (event) => {
 
   if (!focusable.length) return;
 
-  let currentIndex =
-    focusable.indexOf(document.activeElement);
+  const currentIndex = focusable.indexOf(document.activeElement);
 
   if (currentIndex < 0) {
     focusable[0].focus();
     return;
   }
 
-  if (event.key === "ArrowRight") {
-    event.preventDefault();
+  // ERG keypad uses a 3-column grid
+  const keypadButtons = [
+    ...document.querySelectorAll(".keypad button")
+  ];
 
-    currentIndex =
-      (currentIndex + 1) % focusable.length;
+  const keypadIndex =
+    keypadButtons.indexOf(document.activeElement);
 
-    focusable[currentIndex].focus();
+  if (keypadIndex >= 0) {
+    const columns = 3;
+
+    let nextIndex = keypadIndex;
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+
+      if ((keypadIndex + 1) % columns !== 0) {
+        nextIndex = keypadIndex + 1;
+      }
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+
+      if (keypadIndex % columns !== 0) {
+        nextIndex = keypadIndex - 1;
+      }
+    }
+
+  if (event.key === "ArrowDown") {
+  event.preventDefault();
+
+  if (keypadIndex + columns < keypadButtons.length) {
+    nextIndex = keypadIndex + columns;
+    keypadButtons[nextIndex].focus();
+    return;
   }
 
-  if (event.key === "ArrowLeft") {
+  const homeButton = document.querySelector(".home-button");
+
+  if (homeButton) {
+    homeButton.focus();
+    return;
+  }
+}
+
+if (event.key === "ArrowUp") {
+  event.preventDefault();
+
+  if (keypadIndex - columns >= 0) {
+    nextIndex = keypadIndex - columns;
+    keypadButtons[nextIndex].focus();
+    return;
+  }
+}
+
+keypadButtons[nextIndex].focus();
+return;
+}
+if (
+  document.activeElement.classList.contains("home-button") &&
+  event.key === "ArrowUp"
+) {
+  event.preventDefault();
+
+  const keypadButtons = [
+    ...document.querySelectorAll(".keypad button")
+  ];
+
+  keypadButtons[keypadButtons.length - 2].focus();
+  return;
+}
+  // Normal menus stay linear
+  if (
+    event.key === "ArrowDown" ||
+    event.key === "ArrowRight"
+  ) {
     event.preventDefault();
 
-    currentIndex =
+    const next =
+      (currentIndex + 1) % focusable.length;
+
+    focusable[next].focus();
+  }
+
+  if (
+    event.key === "ArrowUp" ||
+    event.key === "ArrowLeft"
+  ) {
+    event.preventDefault();
+
+    const previous =
       (currentIndex - 1 + focusable.length) %
       focusable.length;
 
-    focusable[currentIndex].focus();
+    focusable[previous].focus();
   }
 
   if (event.key === "Enter") {
@@ -245,3 +323,5 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+
+renderMainMenu();
