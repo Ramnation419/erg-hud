@@ -22,44 +22,73 @@ body {
 .hud {
   width: 600px;
   height: 600px;
-  padding: 24px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
+
+/* ---------- HEADERS ---------- */
+
 .header {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  margin-bottom: 28px;
+  margin-bottom: 14px;
   letter-spacing: 1px;
+  flex-shrink: 0;
 }
+
+.result-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.result-sub {
+  font-size: 23px;
+  margin-bottom: 6px;
+}
+
+.hazard {
+  font-size: 21px;
+  margin-top: 12px;
+}
+
+
+/* ---------- MENUS ---------- */
 
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 8px;
+  margin-top: 12px;
 }
+
+
+/* Standard button */
 
 button {
   width: 100%;
-  min-height: 72px;
-  padding: 14px 20px;
+  min-height: 56px;
+  padding: 10px 16px;
 
   border: 2px solid transparent;
-  border-radius: 18px;
+  border-radius: 14px;
 
   background: #15171c;
   color: #fff;
 
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   text-align: left;
 
   opacity: 0.8;
 
   transition:
-    transform 0.25s ease,
+    transform 0.2s ease,
     opacity 0.2s ease,
     border-color 0.2s ease;
 }
@@ -68,82 +97,104 @@ button:focus {
   outline: none;
   border-color: white;
   opacity: 1;
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 
+
+/*
+   Automatically compact long menus.
+   If a menu has 6+ buttons, Fire Lens
+   reduces button size and spacing.
+*/
+
+.menu:has(button:nth-child(6)) {
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.menu:has(button:nth-child(6)) button {
+  min-height: 46px;
+  padding: 7px 14px;
+  font-size: 19px;
+  border-radius: 12px;
+}
+
+
+/* ---------- INFORMATION ---------- */
+
+.info-block {
+  font-size: 19px;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 13px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+
+/* ---------- ERG ---------- */
+
+.erg-number {
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 9px;
+  margin-bottom: 14px;
+}
+
+
+/* ---------- ERG KEYPAD ---------- */
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.keypad button {
+  min-height: 60px;
+  padding: 8px;
+  text-align: center;
+  font-size: 24px;
+}
+
+
+/* ---------- HOME ---------- */
+
+.home-button {
+  margin-top: 10px;
+  min-height: 50px;
+  text-align: center;
+}
+
+
+/* ---------- OPTIONAL INPUT ---------- */
+
 label {
-  font-size: 20px;
-  margin-bottom: 12px;
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 input {
   width: 100%;
-  min-height: 88px;
-  padding: 16px 20px;
+  min-height: 72px;
+  padding: 12px 16px;
 
   background: #15171c;
   color: white;
 
   border: 2px solid #444;
-  border-radius: 18px;
+  border-radius: 14px;
 
-  font-size: 42px;
+  font-size: 38px;
 }
 
 input:focus {
   outline: none;
   border-color: white;
-}
-
-.result-title {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.result-sub {
-  font-size: 26px;
-  margin-bottom: 8px;
-}
-
-.hazard {
-  font-size: 22px;
-  margin-top: 18px;
-}
-
-.info-block {
-  font-size: 21px;
-  line-height: 1.35;
-  margin-bottom: 22px;
-}
-
-.footer {
-  margin-top: auto;
-  font-size: 14px;
-  opacity: 0.65;
-}
-.erg-number {
-  font-size: 52px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 10px;
-  margin-bottom: 20px;
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.keypad button {
-  min-height: 68px;
-  text-align: center;
-  font-size: 26px;
-}
-
-.home-button {
-  margin-top: 14px;
-  min-height: 58px;
-  text-align: center;
 }

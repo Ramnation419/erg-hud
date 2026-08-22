@@ -544,6 +544,202 @@ function renderPumpStop() {
 
   focusFirst();
 }
+function renderPreplansMenu() {
+  hud.innerHTML = `
+    <div class="header">PREPLANS</div>
+
+    <div class="menu">
+      <button data-action="demo-preplan">DEMO COMMERCIAL</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">PROTOTYPE</div>
+  `;
+
+  focusFirst();
+}
+
+function renderDemoPreplan() {
+  hud.innerHTML = `
+    <div class="header">100 INDUSTRIAL WAY</div>
+
+    <div class="result-title">DEMO COMMERCIAL</div>
+
+    <div class="menu">
+      <button data-action="preplan-key">KEY INFO</button>
+      <button data-action="preplan-fire">FIRE PROTECTION</button>
+      <button data-action="preplan-utilities">UTILITIES</button>
+      <button data-action="preplan-more">MORE</button>
+      <button data-action="preplans-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO DATA ONLY</div>
+  `;
+
+  focusFirst();
+}
+
+function renderPreplanKey() {
+  hud.innerHTML = `
+    <div class="header">KEY INFO</div>
+
+    <div class="info-block">
+      <strong>OCCUPANCY</strong><br>
+      COMMERCIAL / INDUSTRIAL
+    </div>
+
+    <div class="info-block">
+      <strong>CONSTRUCTION</strong><br>
+      TYPE II
+    </div>
+
+    <div class="info-block">
+      <strong>SPRINKLER</strong><br>
+      YES
+    </div>
+
+    <div class="info-block">
+      <strong>FDC</strong><br>
+      SIDE A
+    </div>
+
+    <div class="menu">
+      <button data-action="demo-preplan-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPreplanFire() {
+  hud.innerHTML = `
+    <div class="header">FIRE PROTECTION</div>
+
+    <div class="info-block">
+      <strong>SPRINKLER SYSTEM</strong><br>
+      FULL BUILDING
+    </div>
+
+    <div class="info-block">
+      <strong>FDC</strong><br>
+      SIDE A
+    </div>
+
+    <div class="info-block">
+      <strong>FIRE ALARM PANEL</strong><br>
+      MAIN ENTRANCE
+    </div>
+
+    <div class="info-block">
+      <strong>HYDRANT</strong><br>
+      SIDE A • STREET
+    </div>
+
+    <div class="menu">
+      <button data-action="demo-preplan-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPreplanUtilities() {
+  hud.innerHTML = `
+    <div class="header">UTILITIES</div>
+
+    <div class="info-block">
+      <strong>GAS SHUTOFF</strong><br>
+      SIDE C
+    </div>
+
+    <div class="info-block">
+      <strong>ELECTRICAL MAIN</strong><br>
+      ELECTRICAL ROOM
+    </div>
+
+    <div class="info-block">
+      <strong>WATER SHUTOFF</strong><br>
+      MECHANICAL ROOM
+    </div>
+
+    <div class="menu">
+      <button data-action="demo-preplan-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPreplanAccess() {
+  hud.innerHTML = `
+    <div class="header">ACCESS</div>
+
+    <div class="info-block">
+      <strong>PRIMARY ENTRY</strong><br>
+      SIDE A
+    </div>
+
+    <div class="info-block">
+      <strong>SECONDARY ENTRY</strong><br>
+      SIDE C
+    </div>
+
+    <div class="info-block">
+      <strong>KNOX BOX</strong><br>
+      SIDE A • MAIN ENTRANCE
+    </div>
+
+    <div class="menu">
+      <button data-action="demo-preplan-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPreplanHazards() {
+  hud.innerHTML = `
+    <div class="header">HAZARDS</div>
+
+    <div class="info-block">
+      <strong>DEMO HAZARD</strong><br>
+      FOR PROTOTYPE USE ONLY
+    </div>
+
+    <div class="info-block">
+      VERIFY ACTUAL SITE HAZARDS
+      BEFORE OPERATIONAL USE
+    </div>
+
+    <div class="menu">
+      <button data-action="demo-preplan-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+function renderPreplanMore() {
+  hud.innerHTML = `
+    <div class="header">PREPLAN • MORE</div>
+
+    <div class="menu">
+      <button data-action="preplan-access">ACCESS</button>
+      <button data-action="preplan-hazards">HAZARDS</button>
+      <button data-action="demo-preplan-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO DATA ONLY</div>
+  `;
+
+  focusFirst();
+}
 document.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
@@ -687,6 +883,54 @@ if (action === "emr14-fire-back") {
 
 if (action === "pump-back") {
   renderEmr14Pump();
+  return;
+}
+if (action === "preplans") {
+  renderPreplansMenu();
+  return;
+}
+
+if (action === "demo-preplan") {
+  renderDemoPreplan();
+  return;
+}
+
+if (action === "preplan-key") {
+  renderPreplanKey();
+  return;
+}
+
+if (action === "preplan-fire") {
+  renderPreplanFire();
+  return;
+}
+
+if (action === "preplan-utilities") {
+  renderPreplanUtilities();
+  return;
+}
+
+if (action === "preplan-access") {
+  renderPreplanAccess();
+  return;
+}
+
+if (action === "preplan-hazards") {
+  renderPreplanHazards();
+  return;
+}
+
+if (action === "preplans-back") {
+  renderPreplansMenu();
+  return;
+}
+
+if (action === "demo-preplan-back") {
+  renderDemoPreplan();
+  return;
+}
+if (action === "preplan-more") {
+  renderPreplanMore();
   return;
 }
   if (action === "home") {
