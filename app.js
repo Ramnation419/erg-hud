@@ -289,7 +289,261 @@ function renderOpioid() {
 
   focusFirst();
 }
+function renderEquipmentMenu() {
+  hud.innerHTML = `
+    <div class="header">EQUIPMENT</div>
 
+    <div class="menu">
+      <button data-action="emr14">EMR 14</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">APPARATUS INFORMATION</div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14() {
+  hud.innerHTML = `
+    <div class="header">EMR 14</div>
+
+    <div class="result-title">1997 CHEVROLET 3500</div>
+    <div class="result-sub">GAS • EMR / BRUSH</div>
+
+    <div class="menu">
+      <button data-action="emr14-medical">MEDICAL</button>
+      <button data-action="emr14-fire">FIRE / WATER</button>
+      <button data-action="emr14-tools">TOOLS</button>
+      <button data-action="emr14-vehicle">VEHICLE INFO</button>
+      <button data-action="equipment-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14Medical() {
+  hud.innerHTML = `
+    <div class="header">EMR 14 • MEDICAL</div>
+
+    <div class="info-block">
+      <strong>EMR MED BAG</strong><br>
+      DRIVER-SIDE FRONT BED TOOLBOX
+    </div>
+
+    <div class="info-block">
+      <strong>AED</strong><br>
+      DRIVER-SIDE FRONT BED TOOLBOX
+    </div>
+
+    <div class="menu">
+      <button data-action="emr14-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14Fire() {
+  hud.innerHTML = `
+    <div class="header">EMR 14 • FIRE / WATER</div>
+
+    <div class="menu">
+      <button data-action="emr14-pump">PUMP OPERATION</button>
+      <button data-action="emr14-water">WATER SYSTEM</button>
+      <button data-action="emr14-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14Water() {
+  hud.innerHTML = `
+    <div class="header">EMR 14 • WATER</div>
+
+    <div class="info-block">
+      <strong>WATER TANK</strong><br>
+      300 GALLONS
+    </div>
+
+    <div class="info-block">
+      <strong>HANDLINES</strong><br>
+      2 • REAR • EITHER SIDE OF PUMP
+    </div>
+
+    <div class="info-block">
+      <strong>FRONT SPRAYS</strong><br>
+      LEFT + RIGHT BUMPER CORNERS
+    </div>
+
+    <div class="info-block">
+      <strong>FILL HOSE / STORZ</strong><br>
+      REAR • PRECONNECTED
+    </div>
+
+    <div class="info-block">
+      <strong>WATER EXTINGUISHERS</strong><br>
+      3 • PASSENGER-SIDE FRONT BED
+    </div>
+
+    <div class="menu">
+      <button data-action="emr14-fire-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14Tools() {
+  hud.innerHTML = `
+    <div class="header">EMR 14 • TOOLS</div>
+
+    <div class="info-block">
+      <strong>ROPE BAG</strong><br>
+      DRIVER-SIDE FRONT BED TOOLBOX
+    </div>
+
+    <div class="info-block">
+      <strong>PULL STRAP</strong><br>
+      BEHIND CAB BENCH SEAT
+    </div>
+
+    <div class="menu">
+      <button data-action="emr14-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14Vehicle() {
+  hud.innerHTML = `
+    <div class="header">EMR 14 • VEHICLE</div>
+
+    <div class="result-title">1997 CHEVROLET 3500</div>
+
+    <div class="info-block">
+      GAS ENGINE
+    </div>
+
+    <div class="info-block">
+      EMR / BRUSH CONFIGURATION
+    </div>
+
+    <div class="info-block">
+      300 GAL BRUSH SKID
+    </div>
+
+    <div class="menu">
+      <button data-action="emr14-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmr14Pump() {
+  hud.innerHTML = `
+    <div class="header">EMR 14 • PUMP</div>
+
+    <div class="result-title">PUMP OPERATION</div>
+
+    <div class="menu">
+      <button data-action="pump-start">START</button>
+      <button data-action="pump-operate">OPERATE</button>
+      <button data-action="pump-stop">SHUTDOWN</button>
+      <button data-action="emr14-fire-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPumpStart() {
+  hud.innerHTML = `
+    <div class="header">PUMP START</div>
+
+    <div class="info-block">
+      TRUCK → RUNNING
+    </div>
+
+    <div class="info-block">
+      1. CHOKE → ON<br>
+      2. FUEL → START<br>
+      3. IGNITION → RUN<br>
+      4. HOLD START UNTIL RUNNING<br>
+      5. CHOKE → OFF
+    </div>
+
+    <div class="info-block">
+      RECIRC → OPEN
+    </div>
+
+    <div class="menu">
+      <button data-action="pump-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPumpOperate() {
+  hud.innerHTML = `
+    <div class="header">PUMP OPERATION</div>
+
+    <div class="info-block">
+      <strong>STANDBY / NO FLOW</strong><br>
+      RECIRC → OPEN
+    </div>
+
+    <div class="info-block">
+      <strong>FLOWING WATER</strong><br>
+      RECIRC → CLOSED
+    </div>
+
+    <div class="info-block">
+      FUEL LEVER<br>
+      START → RUN
+    </div>
+
+    <div class="menu">
+      <button data-action="pump-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
+
+function renderPumpStop() {
+  hud.innerHTML = `
+    <div class="header">PUMP SHUTDOWN</div>
+
+    <div class="info-block">
+      1. FUEL → IDLE<br>
+      2. ALLOW ENGINE TO IDLE<br>
+      3. IGNITION → OFF<br>
+      4. RECIRC → OPEN
+    </div>
+
+    <div class="menu">
+      <button data-action="pump-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+  `;
+
+  focusFirst();
+}
 document.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
@@ -361,7 +615,80 @@ if (action === "ems-back") {
     renderErgResult(activeErgNumber);
     return;
   }
+if (action === "equipment") {
+  renderEquipmentMenu();
+  return;
+}
 
+if (action === "emr14") {
+  renderEmr14();
+  return;
+}
+
+if (action === "emr14-medical") {
+  renderEmr14Medical();
+  return;
+}
+
+if (action === "emr14-fire") {
+  renderEmr14Fire();
+  return;
+}
+
+if (action === "emr14-tools") {
+  renderEmr14Tools();
+  return;
+}
+
+if (action === "emr14-vehicle") {
+  renderEmr14Vehicle();
+  return;
+}
+
+if (action === "emr14-water") {
+  renderEmr14Water();
+  return;
+}
+
+if (action === "emr14-pump") {
+  renderEmr14Pump();
+  return;
+}
+
+if (action === "pump-start") {
+  renderPumpStart();
+  return;
+}
+
+if (action === "pump-operate") {
+  renderPumpOperate();
+  return;
+}
+
+if (action === "pump-stop") {
+  renderPumpStop();
+  return;
+}
+
+if (action === "equipment-back") {
+  renderEquipmentMenu();
+  return;
+}
+
+if (action === "emr14-back") {
+  renderEmr14();
+  return;
+}
+
+if (action === "emr14-fire-back") {
+  renderEmr14Fire();
+  return;
+}
+
+if (action === "pump-back") {
+  renderEmr14Pump();
+  return;
+}
   if (action === "home") {
     renderMainMenu();
     return;
