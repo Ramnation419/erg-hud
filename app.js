@@ -137,6 +137,8 @@ function renderEmsMenu() {
 
     <div class="menu">
       <button data-action="adult-cpr">ADULT CPR</button>
+      <button data-action="anaphylaxis">ANAPHYLAXIS</button>
+      <button data-action="opioid">OPIOID OVERDOSE</button>
       <button data-action="home">HOME</button>
     </div>
 
@@ -173,8 +175,83 @@ function renderAdultCpr() {
     </div>
 
     <div class="menu">
-      <button data-action="home">HOME</button>
+  <button data-action="ems-back">BACK</button>
+  <button data-action="home">HOME</button>
+</div>
+
+    <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
+  `;
+
+  focusFirst();
+}
+
+function renderAnaphylaxis() {
+  hud.innerHTML = `
+    <div class="header">ANAPHYLAXIS</div>
+
+    <div class="result-title">SEVERE ALLERGIC REACTION</div>
+
+    <div class="info-block">
+      ASSESS AIRWAY / BREATHING
     </div>
+
+    <div class="info-block">
+      REMOVE TRIGGER IF POSSIBLE
+    </div>
+
+    <div class="info-block">
+      EPINEPHRINE PER PROTOCOL
+    </div>
+
+    <div class="info-block">
+      OXYGEN / AIRWAY SUPPORT
+    </div>
+
+    <div class="info-block">
+      RAPID TRANSPORT
+    </div>
+
+   <div class="menu">
+  <button data-action="ems-back">BACK</button>
+  <button data-action="home">HOME</button>
+</div>
+
+    <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
+  `;
+
+  focusFirst();
+}
+
+function renderOpioid() {
+  hud.innerHTML = `
+    <div class="header">OPIOID OVERDOSE</div>
+
+    <div class="result-title">RESPIRATORY DEPRESSION</div>
+
+    <div class="info-block">
+      ASSESS AIRWAY / BREATHING
+    </div>
+
+    <div class="info-block">
+      SUPPORT VENTILATION
+    </div>
+
+    <div class="info-block">
+      NALOXONE PER PROTOCOL
+    </div>
+
+    <div class="info-block">
+      REASSESS RESPIRATIONS
+    </div>
+
+    <div class="info-block">
+      TRANSPORT / MONITOR
+    </div>
+
+    <div class="menu">
+  <button data-action="ems-back">BACK</button>
+  <button data-action="home">HOME</button>
+</div>
 
     <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
   `;
@@ -213,7 +290,19 @@ document.addEventListener("click", (event) => {
     renderAdultCpr();
     return;
   }
+if (action === "anaphylaxis") {
+  renderAnaphylaxis();
+  return;
+}
 
+if (action === "opioid") {
+  renderOpioid();
+  return;
+}
+if (action === "ems-back") {
+  renderEmsMenu();
+  return;
+}
   if (action === "clear") {
     enteredErgNumber = "";
     document.querySelector("#ergNumber").textContent = "----";
