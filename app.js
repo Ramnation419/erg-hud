@@ -167,13 +167,13 @@ function renderEmsMenu() {
     <div class="header">EMS</div>
 
     <div class="menu">
-      <button data-action="adult-cpr">ADULT CPR</button>
-      <button data-action="anaphylaxis">ANAPHYLAXIS</button>
-      <button data-action="opioid">OPIOID OVERDOSE</button>
+      <button data-action="ems-cardiac">CARDIAC</button>
+      <button data-action="ems-medical">MEDICAL</button>
+      <button data-action="ems-trauma">TRAUMA</button>
       <button data-action="home">HOME</button>
     </div>
 
-    <div class="footer">DEMO CONTENT</div>
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
   `;
 
   focusFirst();
@@ -186,52 +186,91 @@ function renderAdultCpr() {
     <div class="result-title">CARDIAC ARREST</div>
 
     <div class="info-block">
-      CHECK RESPONSIVENESS
-    </div>
-
-    <div class="info-block">
-      ACTIVATE EMS / GET AED
-    </div>
-
-    <div class="info-block">
-      START HIGH-QUALITY CPR
-    </div>
-
-    <div class="info-block">
+      <strong>START CPR</strong><br>
       30 : 2
     </div>
 
     <div class="info-block">
+      <strong>RATE</strong><br>
       100–120 / MIN
     </div>
 
-    <div class="menu">
-  <button data-action="ems-back">BACK</button>
-  <button data-action="home">HOME</button>
-</div>
+    <div class="info-block">
+      <strong>DEPTH</strong><br>
+      2–2.4 IN • 5–6 CM
+    </div>
 
-    <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
+    <div class="info-block">
+      FULL RECOIL<br>
+      MINIMIZE PAUSES
+    </div>
+
+    <div class="info-block">
+      AED / DEFIB ASAP
+    </div>
+
+    <div class="menu">
+      <button data-action="cardiac-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
   `;
 
   focusFirst();
 }
+function renderChestPain() {
+  hud.innerHTML = `
+    <div class="header">CHEST PAIN</div>
 
+    <div class="info-block">
+      ABC
+    </div>
+
+    <div class="info-block">
+      OPQRST / SAMPLE
+    </div>
+
+    <div class="info-block">
+      VITALS • SpO₂
+    </div>
+
+    <div class="info-block">
+      12-LEAD IF AVAILABLE
+    </div>
+
+    <div class="info-block">
+      ASPIRIN<br>
+      PER LOCAL PROTOCOL
+    </div>
+
+    <div class="info-block">
+      MONITOR • REASSESS<br>
+      TRANSPORT
+    </div>
+
+    <div class="menu">
+      <button data-action="cardiac-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
 function renderAnaphylaxis() {
   hud.innerHTML = `
     <div class="header">ANAPHYLAXIS</div>
 
-    <div class="result-title">SEVERE ALLERGIC REACTION</div>
-
     <div class="info-block">
-      ASSESS AIRWAY / BREATHING
+      AIRWAY • BREATHING<br>
+      CIRCULATION
     </div>
 
     <div class="info-block">
-      REMOVE TRIGGER IF POSSIBLE
-    </div>
-
-    <div class="info-block">
-      EPINEPHRINE PER PROTOCOL
+      <strong>EPINEPHRINE</strong><br>
+      PER LOCAL PROTOCOL
     </div>
 
     <div class="info-block">
@@ -239,15 +278,20 @@ function renderAnaphylaxis() {
     </div>
 
     <div class="info-block">
-      RAPID TRANSPORT
+      MONITOR FOR SHOCK
     </div>
 
-   <div class="menu">
-  <button data-action="ems-back">BACK</button>
-  <button data-action="home">HOME</button>
-</div>
+    <div class="info-block">
+      REASSESS<br>
+      TRANSPORT
+    </div>
 
-    <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
+    <div class="menu">
+      <button data-action="medical-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
   `;
 
   focusFirst();
@@ -257,34 +301,202 @@ function renderOpioid() {
   hud.innerHTML = `
     <div class="header">OPIOID OVERDOSE</div>
 
-    <div class="result-title">RESPIRATORY DEPRESSION</div>
-
     <div class="info-block">
-      ASSESS AIRWAY / BREATHING
+      CHECK RESPONSIVENESS
     </div>
 
     <div class="info-block">
-      SUPPORT VENTILATION
+      AIRWAY • BREATHING<br>
+      PULSE
     </div>
 
     <div class="info-block">
-      NALOXONE PER PROTOCOL
+      <strong>SUPPORT VENTILATION</strong>
     </div>
 
     <div class="info-block">
-      REASSESS RESPIRATIONS
+      NALOXONE<br>
+      PER LOCAL PROTOCOL
     </div>
 
     <div class="info-block">
-      TRANSPORT / MONITOR
+      IF PULSELESS<br>
+      START CPR + AED
+    </div>
+
+    <div class="info-block">
+      REASSESS
     </div>
 
     <div class="menu">
-  <button data-action="ems-back">BACK</button>
-  <button data-action="home">HOME</button>
-</div>
+      <button data-action="medical-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
 
-    <div class="footer">MOCK PROTOCOL • DEMO ONLY</div>
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
+function renderDifficultyBreathing() {
+  hud.innerHTML = `
+    <div class="header">DIFFICULTY BREATHING</div>
+
+    <div class="info-block">
+      AIRWAY • BREATHING
+    </div>
+
+    <div class="info-block">
+      RESP RATE / EFFORT
+    </div>
+
+    <div class="info-block">
+      SpO₂ • LUNG SOUNDS
+    </div>
+
+    <div class="info-block">
+      POSITION OF COMFORT
+    </div>
+
+    <div class="info-block">
+      OXYGEN / VENTILATION<br>
+      AS INDICATED
+    </div>
+
+    <div class="info-block">
+      REASSESS
+    </div>
+
+    <div class="menu">
+      <button data-action="medical-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
+function renderBleedingControl() {
+  hud.innerHTML = `
+    <div class="header">BLEEDING CONTROL</div>
+
+    <div class="info-block">
+      FIND SOURCE
+    </div>
+
+    <div class="info-block">
+      <strong>DIRECT PRESSURE</strong>
+    </div>
+
+    <div class="info-block">
+      LIFE-THREATENING?
+    </div>
+
+    <div class="info-block">
+      EXTREMITY<br>
+      → TOURNIQUET
+    </div>
+
+    <div class="info-block">
+      NOT TOURNIQUET-ABLE<br>
+      → WOUND PACKING
+    </div>
+
+    <div class="info-block">
+      TREAT FOR SHOCK<br>
+      REASSESS
+    </div>
+
+    <div class="menu">
+      <button data-action="trauma-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
+function renderTourniquet() {
+  hud.innerHTML = `
+    <div class="header">TOURNIQUET</div>
+
+    <div class="result-title">
+      SEVERE EXTREMITY BLEEDING
+    </div>
+
+    <div class="info-block">
+      PLACE<br>
+      <strong>2–3 IN ABOVE WOUND</strong>
+    </div>
+
+    <div class="info-block">
+      NOT ON WOUND<br>
+      NOT OVER JOINT
+    </div>
+
+    <div class="info-block">
+      <strong>TIGHTEN UNTIL<br>
+      BLEEDING STOPS</strong>
+    </div>
+
+    <div class="info-block">
+      SECURE DEVICE
+    </div>
+
+    <div class="info-block">
+      NOTE APPLICATION TIME
+    </div>
+
+    <div class="menu">
+      <button data-action="trauma-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
+function renderImpalement() {
+  hud.innerHTML = `
+    <div class="header">PUNCTURE / IMPALEMENT</div>
+
+    <div class="info-block">
+      <strong>DO NOT REMOVE</strong><br>
+      EMBEDDED OBJECT
+    </div>
+
+    <div class="info-block">
+      CONTROL BLEEDING<br>
+      AROUND OBJECT
+    </div>
+
+    <div class="info-block">
+      STABILIZE WITH<br>
+      BULKY DRESSING
+    </div>
+
+    <div class="info-block">
+      ASSESS DISTAL<br>
+      CIRCULATION
+    </div>
+
+    <div class="info-block">
+      TREAT FOR SHOCK
+    </div>
+
+    <div class="info-block">
+      TRANSPORT
+    </div>
+
+    <div class="menu">
+      <button data-action="trauma-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
   `;
 
   focusFirst();
@@ -740,6 +952,58 @@ function renderPreplanMore() {
 
   focusFirst();
 }
+function renderEmsCardiac() {
+  hud.innerHTML = `
+    <div class="header">EMS • CARDIAC</div>
+
+    <div class="menu">
+      <button data-action="adult-cpr">ADULT CPR</button>
+      <button data-action="chest-pain">CHEST PAIN</button>
+      <button data-action="ems-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmsMedical() {
+  hud.innerHTML = `
+    <div class="header">EMS • MEDICAL</div>
+
+    <div class="menu">
+      <button data-action="difficulty-breathing">DIFFICULTY BREATHING</button>
+      <button data-action="anaphylaxis">ANAPHYLAXIS</button>
+      <button data-action="opioid">OPIOID OVERDOSE</button>
+      <button data-action="ems-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
+
+function renderEmsTrauma() {
+  hud.innerHTML = `
+    <div class="header">EMS • TRAUMA</div>
+
+    <div class="menu">
+      <button data-action="bleeding-control">BLEEDING CONTROL</button>
+      <button data-action="tourniquet">TOURNIQUET</button>
+      <button data-action="impalement">PUNCTURE / IMPALEMENT</button>
+      <button data-action="ems-back">BACK</button>
+      <button data-action="home">HOME</button>
+    </div>
+
+    <div class="footer">DEMO • VERIFY LOCAL PROTOCOL</div>
+  `;
+
+  focusFirst();
+}
 document.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
@@ -766,11 +1030,33 @@ document.addEventListener("click", (event) => {
     renderEmsMenu();
     return;
   }
+if (action === "ems-cardiac") {
+  renderEmsCardiac();
+  return;
+}
 
+if (action === "ems-medical") {
+  renderEmsMedical();
+  return;
+}
+
+if (action === "ems-trauma") {
+  renderEmsTrauma();
+  return;
+}
   if (action === "adult-cpr") {
     renderAdultCpr();
     return;
   }
+  if (action === "chest-pain") {
+  renderChestPain();
+  return;
+}
+
+if (action === "cardiac-back") {
+  renderEmsCardiac();
+  return;
+}
 if (action === "anaphylaxis") {
   renderAnaphylaxis();
   return;
@@ -931,6 +1217,34 @@ if (action === "demo-preplan-back") {
 }
 if (action === "preplan-more") {
   renderPreplanMore();
+  return;
+}
+if (action === "difficulty-breathing") {
+  renderDifficultyBreathing();
+  return;
+}
+
+if (action === "medical-back") {
+  renderEmsMedical();
+  return;
+}
+if (action === "bleeding-control") {
+  renderBleedingControl();
+  return;
+}
+
+if (action === "tourniquet") {
+  renderTourniquet();
+  return;
+}
+
+if (action === "impalement") {
+  renderImpalement();
+  return;
+}
+
+if (action === "trauma-back") {
+  renderEmsTrauma();
   return;
 }
   if (action === "home") {
