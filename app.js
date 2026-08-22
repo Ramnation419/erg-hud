@@ -1,15 +1,46 @@
 const hud = document.querySelector(".hud");
 
 const ergData = {
+  "1202": {
+    name: "DIESEL FUEL",
+    guide: "128",
+    hazard: "Flammable Liquid",
+    isolation: "Keep unauthorized personnel away.",
+    response: "Eliminate ignition sources. Avoid low areas."
+  },
+
   "1203": {
     name: "GASOLINE",
     guide: "128",
     hazard: "Flammable Liquid",
     isolation: "Keep unauthorized personnel away.",
-    response: "Eliminate ignition sources and avoid low areas."
+    response: "Eliminate ignition sources. Avoid low areas."
+  },
+
+  "1075": {
+    name: "LIQUEFIED PETROLEUM GAS",
+    guide: "115",
+    hazard: "Flammable Gas",
+    isolation: "Keep unauthorized personnel away. Stay upwind.",
+    response: "Eliminate ignition sources. Avoid low areas."
+  },
+
+  "1017": {
+    name: "CHLORINE",
+    guide: "124",
+    hazard: "Toxic Gas / Oxidizer",
+    isolation: "Keep unauthorized personnel away. Stay upwind.",
+    response: "Avoid contact. Do not enter vapor cloud without proper PPE."
+  },
+
+  "3480": {
+    name: "LITHIUM ION BATTERIES",
+    guide: "147",
+    hazard: "Fire / Explosion",
+    isolation: "Keep unauthorized personnel away.",
+    response: "Monitor for fire, heat, smoke and damaged cells."
   }
 };
-
 let activeErgNumber = "1203";
 let enteredErgNumber = "";
 
